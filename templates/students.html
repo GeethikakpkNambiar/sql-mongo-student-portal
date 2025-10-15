@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        img { max-width: 100px; max-height: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Student Lookup</h1>
+    <form method="post">
+        <label for="student_id">Enter Student ID:</label>
+        <input type="text" id="student_id" name="student_id" required>
+        <button type="submit">Search</button>
+    </form>
+    <br>
+    {% if student %}
+    <table>
+        <tr><th>ID</th><td>{{ student._id }}</td></tr>
+        <tr><th>Name</th><td>{{ student.Name }}</td></tr>
+        <tr><th>Age</th><td>{{ student.age }}</td></tr>
+        <tr><th>Gender</th><td>{{ student.gender }}</td></tr>
+        <tr><th>Image</th>
+            <td>
+                {% if student.image %}
+                <img src="data:image/png;base64,{{ student.image }}" alt="Profile Picture">
+                {% else %}
+                No Image
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    {% elif student is not none %}
+    <p>No student found with that ID.</p>
+    {% endif %}
+</body>
+</html>
